@@ -1,0 +1,54 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Git checkout') {
+            steps {
+                echo 'Git checkout'
+            }
+        }
+        
+        stage('Compile') {
+            steps {
+                echo 'Compiled successfully!'
+            }
+        }
+        
+
+        
+        stage('JUnit') {
+            steps {
+                echo 'JUnit passed successfully!'
+            }
+        }
+        
+        
+        stage('Quality Gate') {
+            steps {
+                echo 'Quality Gate passed successfully!'
+            }
+        }
+    }
+    
+    post{
+        always{
+             echo 'This will always run.'
+        }
+        success{
+             echo 'This will run on success.'
+        }
+        failure{
+             echo 'This will run on failure.'
+        }
+        unstable{
+             echo 'This will run if unstable.'
+        }
+        changed{
+             echo 'This will run on change.'
+        }
+        
+        
+    }
+    
+    
+}
