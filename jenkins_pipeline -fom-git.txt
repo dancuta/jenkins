@@ -1,16 +1,22 @@
 pipeline {
     agent any
-
+    
+    // we can specify Agent's name instead of any
+   
     stages {
+        
         stage('Git checkout') {
             steps {
-                echo 'Git checkout'
+                echo 'Git checkout https://github.com/dancuta/jenkins.git'
+                git branch: 'main', url: 'https://github.com/dancuta/jenkins.git'
+                
             }
         }
         
-        stage('Compile') {
+        stage('Build') {
             steps {
-                echo 'Compiled successfully!'
+                echo 'Start Build stage ..';
+                bat 'build.bat'
             }
         }
         
@@ -25,7 +31,8 @@ pipeline {
         
         stage('Quality Gate') {
             steps {
-                echo 'Quality Gate passed successfully!'
+               echo 'Start Quality Gate stage ..';
+               bat 'quality.bat'
             }
         }
     }
